@@ -14,7 +14,7 @@ class Game
       score += @frames[n].score
 
       if @frames[n].strike?
-        score += if @frames[n].strike? && n == 9
+        score += if n == 9
                    @frames[n].second_mark.score
                  elsif @frames[n + 1].strike? && n != 8
                    @frames[n + 1].score + @frames[n + 2].first_mark.score
@@ -24,7 +24,7 @@ class Game
                    @frames[n + 1].score
                  end
       elsif @frames[n].spare? && n != 9
-        score += @frames[n + 1].first_mark.score
+          score += @frames[n + 1].first_mark.score
       end
     end
     score
