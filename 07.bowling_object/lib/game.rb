@@ -13,18 +13,19 @@ class Game
     10.times do |n|
       score += @frames[n].score
 
+      points = []
+
+      points << if n < 9
+                  [@frames[n + 1].first_mark.score, @frames[n + 1].second_mark.score]
+                else
+                  break
+                end
+      point = points.flatten
+
       if @frames[n].strike?
-        score += if n == 9
-                   @frames[n].second_mark.score
-                 elsif @frames[n + 1].strike? && n != 8
-                   @frames[n + 1].score + @frames[n + 2].first_mark.score
-                 elsif @frames[n + 1].spare?
-                   @frames[n + 1].first_mark.score + @frames[n + 1].second_mark.score
-                 else
-                   @frames[n + 1].score
-                 end
-      elsif @frames[n].spare? && n != 9
-          score += @frames[n + 1].first_mark.score
+        score += point.sum
+      elsif @frames[n].spare?
+        score += point[0]
       end
     end
     score
