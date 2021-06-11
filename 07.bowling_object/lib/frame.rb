@@ -1,9 +1,7 @@
-
 # frozen_string_literal: true
 
 require './lib/mark'
 
-# frame
 class Frame
   attr_reader :first_mark, :second_mark, :third_mark
 

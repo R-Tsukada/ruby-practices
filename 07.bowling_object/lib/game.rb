@@ -2,7 +2,6 @@
 
 require './lib/frame'
 
-# game
 class Game
   def initialize(mark)
     @frames = frames(mark.split(',').map { |m| m == 'X' ? 10 : m.to_i })
