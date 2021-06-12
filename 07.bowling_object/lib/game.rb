@@ -15,7 +15,7 @@ class Game
       points = []
       points << (@frames[n + 1]&.first_mark&.score || 0)
 
-      if n < 10
+      if n <= 9
         if @frames[n - 1]&.strike?
           points << 10
         else
