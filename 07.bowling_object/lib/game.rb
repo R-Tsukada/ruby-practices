@@ -13,23 +13,15 @@ class Game
       score += @frames[n].score
 
       points = []
-                 # 9, 10投目がストライクの場合
-      points << if n == 8 && @frames[n + 1].strike?
-                  [@frames[n + 1].score]
-                  #最終フレームがストライクの場合
-                elsif n == 9 && @frames[n].strike?
-                  [@frames[n].second_mark.score]
-                  # 最終フレーム以外
-                elsif n < 9
-                  #　次がストライクの場合
-                  if @frames[n + 1].strike?
-                    [@frames[n + 1].first_mark.score, @frames[n + 2].first_mark.score]
-                  else
-                    [@frames[n + 1].first_mark.score, @frames[n + 1].second_mark.score]
-                  end
-                else # ストライク以外の最終フレームはbreakする
-                  break
-                end
+      points << (@frames[n + 1]&.first_mark&.score || 0)
+
+      if n < 10
+        if @frames[n - 1]&.strike?
+          points << 10
+        else
+          points << (@frames[n + 1]&.second_mark&.score || 0)
+        end
+      end
 
       point = points.flatten
 
