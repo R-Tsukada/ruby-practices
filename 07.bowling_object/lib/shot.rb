@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-class Mark
+class Shot
   attr_reader :mark
 
   def initialize(mark)
