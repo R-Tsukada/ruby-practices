@@ -9,42 +9,39 @@ class Game
 
   def score
     score = 0
-    10.times do |n|
-      score += @frames[n].score
-
-      points = []
-      points << (@frames[n + 1]&.first_mark&.score || 0)
-
-      if n <= 9
-        if @frames[n - 1]&.strike?
-          points << 10
-        else
-          points << (@frames[n + 1]&.second_mark&.score || 0)
-        end
-      end
-
-      point = points.flatten
-
-      if @frames[n].strike?
-        score += point.sum
-      elsif @frames[n].spare?
-        score += point[0]
+    @frames.each_with_index do |frame, n|
+      score += frame.score
+      if frame.strike? && next_frame(n)
+        score += next_frame(n).strike_bonus
+        score += 10 if @frames[n - 1].strike?
+      elsif frame.strike?
+        score += 10
+      elsif frame.spare? && next_frame(n)
+        score += next_frame(n).spare_bonus
       end
     end
     score
   end
+end
 
-  def frames(marks)
-    frame_count = 0
-    frames = []
-    10.times do |n|
-      first_mark = marks[frame_count]
-      second_mark = marks[frame_count += 1] if first_mark != 10 || n == 9
-      third_mark = marks[frame_count += 1] if n == 9
-      frames << Frame.new(first_mark, second_mark, third_mark)
-      frame_count += 1
-    end
-    frames
+def last_frame(frames)
+  frames.size == 10
+end
+
+def next_frame(current_number)
+  @frames.fetch(current_number + 1, nil)
+end
+
+def frames(marks)
+  frame_count = 0
+  frames = []
+  10.times do |n|
+    first_mark = marks[frame_count]
+    second_mark = marks[frame_count += 1] if first_mark != 10 || n == 9
+    third_mark = marks[frame_count += 1] if n == 9
+    frames << Frame.new(first_mark, second_mark, third_mark)
+    frame_count += 1
   end
+  frames
 end
 
