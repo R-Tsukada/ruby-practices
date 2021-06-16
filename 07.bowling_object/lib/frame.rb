@@ -15,6 +15,14 @@ class Frame
     @first_mark.score + @second_mark.score + @third_mark.score
   end
 
+  def strike_bonus
+    @first_mark.score + @second_mark.score
+  end
+
+  def spare_bonus
+    @first_mark.score
+  end
+
   def strike?
     @first_mark.score == 10
   end
