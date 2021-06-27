@@ -34,7 +34,7 @@ class ShortStyle
   def short_style_format_table(transpose_files, max_filename_count)
     transpose_files.map do |f|
       short_style_format_row(f, max_filename_count)
-    end.join('\n')
+    end.join("\n")
   end
 
   def short_style_format_row(filenames, max_file_path_count)
