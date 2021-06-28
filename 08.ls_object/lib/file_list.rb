@@ -2,7 +2,7 @@ require './lib/file_data'
 require 'pathname'
 
 class FileList
-  attr_reader :long_format, :file_list
+  attr_reader :long_style, :file_list
 
   def initialize(pathname, reverse: false, dot_match: false)
     @pathname = pathname
