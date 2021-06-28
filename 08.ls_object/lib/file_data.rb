@@ -1,3 +1,5 @@
+require 'etc'
+
 class FileData
   MODE_TABLE = {
     '0' => '---',
