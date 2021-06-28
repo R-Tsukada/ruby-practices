@@ -1,21 +1,27 @@
+require './lib/file_data'
+require 'pathname'
+
 class FileList
+  attr_reader :long_format, :file_list
+
   def initialize(pathname, reverse: false, dot_match: false)
-    @pathname = pathname.glob('*').sort
+    @pathname = pathname
+    @file = @pathname.glob('*').sort
     @reverse = reverse
     @dot_match = dot_match
-    @files = initialize_files
+    @file_list = initialize_files
   end
 
   def filename
-    @pathname.map(&:basename).map(&:to_s)
+    @file.map(&:basename).map(&:to_s)
   end
 
   def max_filename_count
-    @pathname.map { |f| File.basename(f).size }.max
+    @file.map { |f| File.basename(f).size }.max
   end
 
   def total_file_blocks
-    @files.sum(&:file_blocks)
+    @file_list.sum(&:file_blocks)
   end
 
   def initialize_files

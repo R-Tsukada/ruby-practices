@@ -13,7 +13,6 @@ class FileData
   def initialize(filepath)
     @filepath = filepath
     @file_stat = File::Stat.new(@filepath)
-    @file_name = File.basename(@filepath)
   end
 
   def file_blocks
@@ -25,12 +24,12 @@ class FileData
   end
 
   #変数名を変更する
-  def file_owner
+  def file_owner_name
     Etc.getpwuid(@file_stat.uid).name
   end
 
   #変数名を変更する
-  def file_group
+  def file_group_name
     Etc.getgrgid(@file_stat.gid).name
   end
 
@@ -40,6 +39,10 @@ class FileData
 
   def mtime
     @file_stat.mtime.strftime('%_m %e %R')
+  end
+
+  def filename
+    File.basename(@filepath)
   end
 
   def type
