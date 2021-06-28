@@ -2,25 +2,21 @@ require 'pathname'
 require './lib/file_list'
 
 class ShortStyle
-  def initialize(file_list, long_format: false)
-    @file_list = file_list
-    @long_format = long_format
+  def initialize(file, short_format: false)
+    @file = file
+    @short_format = short_format
   end
 
-  def run_ls
-    @long_format ? long_format : short_format
-  end
-
-  def long_format
-    'hi'
+  def run_ls_short_style
+    short_format
   end
 
   def row_count
-    (@file_list.filename.count.to_f / 3).ceil
+    (@file.filename.count.to_f / 3).ceil
   end
 
   def nested_files
-    @file_list.filename.each_slice(row_count).to_a
+    @file.filename.each_slice(row_count).to_a
   end
 
   def transpose_files
@@ -28,7 +24,7 @@ class ShortStyle
   end
 
   def short_format
-    short_style_format_table(transpose_files, @file_list.max_filename_count)
+    short_style_format_table(transpose_files, @file.max_filename_count)
   end
 
   def short_style_format_table(transpose_files, max_filename_count)
