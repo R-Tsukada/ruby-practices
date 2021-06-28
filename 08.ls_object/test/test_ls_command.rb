@@ -1,7 +1,6 @@
 require 'minitest/autorun'
 require './lib/file_list'
-require './lib/format/short_style'
-require './lib/format/long_style'
+require './lib/format'
 require 'pathname'
 
 class LsCommandTest < Minitest::Test
@@ -18,10 +17,10 @@ class LsCommandTest < Minitest::Test
       bin                     package.json
     TEXT
     file_list = FileList.new(TARGET_PATHNAME)
-    assert_equal expected, ShortStyle.new(file_list).run_ls_short_style
+    assert_equal expected, Format.new(file_list).run_ls
   end
 
-  def run_ls_show_dots
+  def test_run_ls_show_dots
     expected = <<~TEXT.chomp
       .                       Gemfile.lock            node_modules
       ..                      README.md               package.json
@@ -36,10 +35,10 @@ class LsCommandTest < Minitest::Test
       Gemfile                 log
     TEXT
     file_list = FileList.new(TARGET_PATHNAME, dot_match: true)
-    assert_equal expected, ShortStyle.new(file_list).run_ls_short_style
+    assert_equal expected, Format.new(file_list).run_ls
   end
 
-  def run_ls_reverse
+  def test_run_ls_reverse
     expected = <<~TEXT.chomp
       yarn.lock               package.json            bin
       vendor                  node_modules            babel.config.js
@@ -50,12 +49,12 @@ class LsCommandTest < Minitest::Test
       postcss.config.js       config                  Gemfile
     TEXT
     file_list = FileList.new(TARGET_PATHNAME, reverse: true)
-    assert_equal expected, ShortStyle.new(file_list).run_ls_short_style
+    assert_equal expected, Format.new(file_list).run_ls
   end
 
   def test_run_ls_long_format
     expected = `ls -l #{TARGET_PATHNAME}`.chomp
     file_list = FileList.new(TARGET_PATHNAME)
-    assert_equal expected, LongStyle.new(file_list, long_format: true).run_ls_long_format
+    assert_equal expected, Format.new(file_list, long_style: true).run_ls
   end
 end
