@@ -11,6 +11,9 @@ class Game
     score = 0
     @frames.each_with_index do |frame, n|
       score += frame.score
+
+      next unless next_frame(n)
+
       if frame.strike? && next_frame(n)
         score += next_frame(n).strike_bonus
         score += 10 if @frames[n - 1].strike?
@@ -22,10 +25,6 @@ class Game
     end
     score
   end
-end
-
-def last_frame(frames)
-  frames.size == 10
 end
 
 def next_frame(current_number)
