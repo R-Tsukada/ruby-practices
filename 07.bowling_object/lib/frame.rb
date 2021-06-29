@@ -3,8 +3,6 @@
 require './lib/shot'
 
 class Frame
-  attr_reader :first_mark, :second_mark, :third_mark
-
   def initialize(first_mark, second_mark, third_mark)
     @first_mark = Shot.new(first_mark)
     @second_mark = Shot.new(second_mark)
