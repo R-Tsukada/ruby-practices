@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'optparse'
 require 'pathname'
 require './lib/file_list'
 require './lib/format'
-
 
 opt = OptionParser.new
 short_format = false, long_style = false, reverse = false, dot_match = false

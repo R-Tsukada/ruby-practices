@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/file_data'
 require 'pathname'
 
@@ -28,7 +30,7 @@ class FileList
     file_paths = collect_file_paths
     file_paths.map { |file_path| FileData.new(file_path) }
   end
-  
+
   def collect_file_paths
     pattern = @pathname.join('*')
     params = @dot_match ? [pattern, File::FNM_DOTMATCH] : [pattern]
