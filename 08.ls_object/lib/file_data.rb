@@ -25,12 +25,10 @@ class FileData
     @file_stat.nlink.to_s
   end
 
-  #変数名を変更する
   def file_owner_name
     Etc.getpwuid(@file_stat.uid).name
   end
 
-  #変数名を変更する
   def file_group_name
     Etc.getgrgid(@file_stat.gid).name
   end
