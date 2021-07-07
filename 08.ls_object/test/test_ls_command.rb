@@ -22,17 +22,16 @@ class LsCommandTest < Minitest::Test
 
   def test_run_ls_show_dots
     expected = <<~TEXT.chomp
-      .                       Gemfile.lock            node_modules
-      ..                      README.md               package.json
-      .browserslistrc         Rakefile                postcss.config.js
-      .env                    app                     public
-      .env.sample             babel.config.js         storage
-      .git                    bin                     test
-      .gitignore              config                  tmp
-      .idea                   config.ru               vendor
-      .rubocop.yml            db                      yarn.lock
-      .ruby-version           lib
-      Gemfile                 log
+      .                       Gemfile.lock            log
+      ..                      README.md               node_modules
+      .browserslistrc         Rakefile                package.json
+      .env                    app                     postcss.config.js
+      .env.sample             babel.config.js         public
+      .gitignore              bin                     storage
+      .idea                   config                  test
+      .rubocop.yml            config.ru               tmp
+      .ruby-version           db                      yarn.lock
+      Gemfile                 lib
     TEXT
     file_list = FileList.new(TARGET_PATHNAME, dot_match: true)
     assert_equal expected, Format.new(file_list).run_ls
@@ -40,13 +39,13 @@ class LsCommandTest < Minitest::Test
 
   def test_run_ls_reverse
     expected = <<~TEXT.chomp
-      yarn.lock               package.json            bin
-      vendor                  node_modules            babel.config.js
+      yarn.lock               node_modules            babel.config.js
       tmp                     log                     app
       test                    lib                     Rakefile
       storage                 db                      README.md
       public                  config.ru               Gemfile.lock
       postcss.config.js       config                  Gemfile
+      package.json            bin
     TEXT
     file_list = FileList.new(TARGET_PATHNAME, reverse: true)
     assert_equal expected, Format.new(file_list).run_ls
