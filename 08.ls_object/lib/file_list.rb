@@ -11,7 +11,7 @@ class FileList
     @file = @pathname.glob('*').sort
     @reverse = reverse
     @dot_match = dot_match
-    @file_list = initialize_files
+    @file_list = file_data
   end
 
   def filename
@@ -26,7 +26,7 @@ class FileList
     @file_list.sum(&:file_blocks)
   end
 
-  def initialize_files
+  def file_data
     file_paths = collect_file_paths
     file_paths.map { |file_path| FileData.new(file_path) }
   end
