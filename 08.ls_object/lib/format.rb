@@ -51,14 +51,12 @@ class Format
     short_style_format_table(transpose_files, @file.max_filename_count)
   end
 
-  # 1行ごとにファイルを分類
   def short_style_format_table(transpose_files, max_filename_count)
     transpose_files.map do |f|
       short_style_format_row(f, max_filename_count)
     end.join("\n")
   end
 
-  # 行のフォーマット
   def short_style_format_row(filenames, max_filename_count)
     filenames.map do |f|
       f ||= ''
@@ -66,7 +64,6 @@ class Format
     end.join.rstrip
   end
 
-  # ファイル数を行数で割る
   def row_count
     (@file.filename.count.to_f / 3).ceil
   end
@@ -75,12 +72,10 @@ class Format
     width / (max_filename_count + 1)
   end
 
-  # 縦の列に分ける
   def nested_files
     @file.filename.each_slice(row_count).to_a
   end
 
-  # transposeする
   def transpose_files
     nested_files[0].zip(*nested_files[1..])
   end
