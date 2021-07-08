@@ -80,4 +80,3 @@ class Format
     nested_files[0].zip(*nested_files[1..])
   end
 end
-
