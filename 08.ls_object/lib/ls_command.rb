@@ -14,5 +14,5 @@ opt.parse!(ARGV)
 path = ARGV[0] || '.'
 pathname = Pathname(path)
 
-ls_file_list = FileList.new(pathname, reverse: reverse, dot_match: dot_match)
-puts Format.new(ls_file_list, long_style: long_style, short_style: short_format).run_ls
+file_list = FileList.new(pathname, reverse: reverse, dot_match: dot_match)
+puts Format.new(file_list, long_style: long_style, short_style: short_format).run_ls
