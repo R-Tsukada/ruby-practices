@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/frame'
+require_relative 'frame'
 
 class Game
   def initialize(mark)

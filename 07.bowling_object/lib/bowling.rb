@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/game'
+require_relative 'game'
 
 if __FILE__ == $PROGRAM_NAME
   game = Game.new(ARGV[0])
