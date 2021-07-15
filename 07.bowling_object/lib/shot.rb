@@ -10,4 +10,3 @@ class Shot
     @mark == 'X' ? 10 : @mark.to_i
   end
 end
-
