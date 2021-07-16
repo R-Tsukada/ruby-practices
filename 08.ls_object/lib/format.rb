@@ -21,7 +21,7 @@ class Format
   end
 
   def long_style_body
-    @file.file_list.map do |file|
+    @file.file_contents.map do |file|
       long_style_row(file, *max_size)
     end.join("\n")
   end
@@ -40,10 +40,10 @@ class Format
 
   def max_size
     [
-      @file.file_list.map { |file| file.nlink.size }.max,
-      @file.file_list.map { |file| file.file_owner_name.size }.max,
-      @file.file_list.map { |file| file.file_group_name.size }.max,
-      @file.file_list.map { |file| file.bytesize.size }.max
+      @file.file_contents.map { |file| file.nlink.size }.max,
+      @file.file_contents.map { |file| file.file_owner_name.size }.max,
+      @file.file_contents.map { |file| file.file_group_name.size }.max,
+      @file.file_contents.map { |file| file.bytesize.size }.max
     ]
   end
 
