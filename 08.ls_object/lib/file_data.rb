@@ -12,9 +12,9 @@ class FileData
     '7' => 'rwx'
   }.freeze
 
-  def initialize(filepath)
-    @filepath = filepath
-    @file_stat = File::Stat.new(@filepath)
+  def initialize(file_path)
+    @file_path = file_path
+    @file_stat = File::Stat.new(@file_path)
   end
 
   def file_blocks
@@ -41,8 +41,8 @@ class FileData
     @file_stat.mtime.strftime('%_m %e %R')
   end
 
-  def filename
-    File.basename(@filepath)
+  def file_name
+    File.basename(@file_path)
   end
 
   def type

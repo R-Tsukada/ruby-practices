@@ -34,7 +34,7 @@ class Format
       "  #{file.file_group_name.rjust(max_group)}",
       "  #{file.bytesize.rjust(max_size)}",
       " #{file.mtime}",
-      " #{file.filename}"
+      " #{file.file_name}"
     ].join
   end
 
@@ -65,7 +65,7 @@ class Format
   end
 
   def row_count
-    (@file.filename.count.to_f / 3).ceil
+    (@file.file_names.count.to_f / 3).ceil
   end
 
   def col_count(width, max_filename_count)
@@ -73,7 +73,7 @@ class Format
   end
 
   def nested_files
-    @file.filename.each_slice(row_count).to_a
+    @file.file_names.each_slice(row_count).to_a
   end
 
   def transpose_files

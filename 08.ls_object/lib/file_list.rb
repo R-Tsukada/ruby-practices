@@ -6,16 +6,16 @@ require 'pathname'
 class FileList
   attr_reader :long_style, :file_list
 
-  def initialize(pathname, reverse: false, dot_match: false)
-    @pathname = pathname
-    @file = @pathname.glob('*').sort
+  def initialize(path_name, reverse: false, dot_match: false)
+    @path_name = path_name
+    @file = @path_name.glob('*').sort
     @reverse = reverse
     @dot_match = dot_match
     @file_list = file_data
   end
 
-  def filename
-    @file_list.map(&:filename)
+  def file_names
+    @file_list.map(&:file_name)
   end
 
   def max_filename_count
@@ -32,7 +32,7 @@ class FileList
   end
 
   def collect_file_paths
-    pattern = @pathname.join('*')
+    pattern = @path_name.join('*')
     params = @dot_match ? [pattern, File::FNM_DOTMATCH] : [pattern]
     file_paths = Dir.glob(*params).sort
     @reverse ? file_paths.reverse : file_paths
