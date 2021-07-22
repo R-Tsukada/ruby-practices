@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/file_data'
+require './lib/ls_file'
 require 'pathname'
 
 class FileList
@@ -10,7 +10,7 @@ class FileList
     @file = @path_name.glob('*').sort
     @reverse = reverse
     @dot_match = dot_match
-    @file_contents = file_contents
+    @file_contents = ls_files
   end
 
   def file_names
@@ -25,9 +25,9 @@ class FileList
     @file_contents.sum(&:file_blocks)
   end
 
-  def file_contents
+  def ls_files
     file_paths = collect_file_paths
-    file_paths.map { |file_path| FileData.new(file_path) }
+    file_paths.map { |file_path| LsFile.new(file_path) }
   end
 
   def collect_file_paths

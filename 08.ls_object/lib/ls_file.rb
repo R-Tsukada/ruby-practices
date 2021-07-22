@@ -1,6 +1,6 @@
 require 'etc'
 
-class FileData
+class LsFile
   MODE_TABLE = {
     '0' => '---',
     '1' => '-x-',
