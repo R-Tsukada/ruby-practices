@@ -1,24 +1,26 @@
 # frozen_string_literal: true
 
 require_relative 'shot'
+require_relative 'bonus'
 
 class Frame
   def initialize(first_mark, second_mark, third_mark)
     @first_mark = Shot.new(first_mark)
     @second_mark = Shot.new(second_mark)
     @third_mark = Shot.new(third_mark)
+    @bonus = Bonus.new(first_mark, second_mark)
   end
 
   def score
     @first_mark.score + @second_mark.score + @third_mark.score
   end
 
-  def strike_bonus
-    @first_mark.score + @second_mark.score
+  def strike
+    @bonus.strike
   end
 
-  def spare_bonus
-    @first_mark.score
+  def spare
+    @bonus.spare
   end
 
   def strike?

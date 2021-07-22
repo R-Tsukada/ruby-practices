@@ -15,10 +15,10 @@ class Game
       next unless next_frame(n)
 
       if frame.strike? && next_frame(n)
-        score += next_frame(n).strike_bonus
+        score += next_frame(n).strike
         score += 10 if @frames[n + 1].strike?
       elsif frame.spare? && next_frame(n)
-        score += next_frame(n).spare_bonus
+        score += next_frame(n).spare
       end
     end
     score
